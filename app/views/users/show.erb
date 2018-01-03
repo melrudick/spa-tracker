@@ -1,0 +1,14 @@
+<h1>Hello, <%= @user.username %></h1>
+<p> Your Clients: </p>
+<% @user.clients.each do |client| %>
+  <ul>
+    <li><a href="/clients/<%=client.id%>"><%= client.name %></a></li>
+  </ul>
+<% end %>
+
+<p>Your Appointments: </p>
+<% @user.appointments.each do |appointment| %>
+  <ul>
+    <li><a href="/appointments/<%=appointment.id%>"><%= appoointment.name %></a></li>
+  </ul>
+<% end %>
