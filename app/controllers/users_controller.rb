@@ -2,24 +2,39 @@ class UsersController < ApplicationController
 
   # get '/users/:id' do
   #   if !logged_in?
-  #     redirect '/bags'
+  #     redirect '/users/login'
   #   end
   #
-  #   @user = User.find(params[:id])
+  #   @user = User.find(params[:user_id])
   #   if !@user.nil? && @user == current_user
   #     erb :'users/show'
   #   else
-  #     redirect '/bags'
+  #     redirect '/users/login'
   #   end
   # end
   #
-  # get '/signup' do
-  #   if !session[:user_id]
-  #     erb :'users/new'
-  #   else
-  #     redirect to '/clubs'
-  #   end
-  # end
+  get '/signup' do
+    if logged_in?
+      redirect 'users/show'
+    else
+      erb :'users/new'
+    end
+    # if !session[:user_id]
+    #   erb :'users/new'
+    # else
+    #   redirect to 'users/login'
+    # end
+  end
+
+  post "/signup" do
+    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+      redirect "/signup"
+    else
+      @user = User.create(username: params[:username], password: params[:password])
+      session[:user_id] = @user.id
+      redirect "users/show"
+    end
+  end
   #
   # post '/signup' do
   #   if params[:username] == "" || params[:password] == ""
@@ -31,14 +46,13 @@ class UsersController < ApplicationController
   #   end
   # end
   #
-  # get '/login' do
-  #   @error_message = params[:error]
-  #   if !session[:user_id]
-  #     erb :'users/login'
-  #   else
-  #     redirect '/bags'
-  #   end
-  # end
+  get '/users/login' do
+    if !session[:user_id]
+      erb :'users/login'
+    else
+      redirect '/'
+    end
+  end
   #
   # post '/login' do
   #   user = User.find_by(:username => params[:username])
@@ -57,6 +71,12 @@ class UsersController < ApplicationController
   #   else
   #     redirect to '/'
   #   end
+  # end
+
+  # get '/users/:id' do
+  #   @user = current_user
+  #   @clients = @user.clients
+  #   erb :'users/show'
   # end
 
 end

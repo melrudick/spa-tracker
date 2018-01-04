@@ -1,6 +1,13 @@
 <h1>Hello, <%= @user.username %></h1>
+
+<h2>What would you like to do?</h2>
+
+
 <p> Your Clients: </p>
-<% @user.clients.each do |client| %>
+<% if @clients.length == 0 %>
+  <p> You have no clients. Add a client using the link below.</p>
+<% end %>
+<% @clients.each do |client| %>
   <ul>
     <li><a href="/clients/<%=client.id%>"><%= client.name %></a></li>
   </ul>
@@ -9,6 +16,6 @@
 <p>Your Appointments: </p>
 <% @user.appointments.each do |appointment| %>
   <ul>
-    <li><a href="/appointments/<%=appointment.id%>"><%= appoointment.name %></a></li>
+    <li><a href="/appointments/<%=appointment.id%>"><%= appointment.name %></a></li>
   </ul>
 <% end %>

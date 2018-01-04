@@ -1,18 +1,11 @@
-<h1>Add a New Golf Club</h1>
+<h1>Create a New Appointment</h1>
 
-<form action="/clubs" method="POST">
-  <label> Club Name </label>
-  <input type="text" name="name"> </br>
-
-  <label> Club Manufacturer </label>
-  <input type="text" name="manufacturer"> </br>
-
-  <label> Which Golf Bag does this belong in? </label>
-  <select name="golf_bag_id">
-    <% current_user.golf_bags.each do |bag| %>
-      <option value=<%=bag.id %>><%= bag.name %></option>
-    <% end %>
-  </select>
-
-  <input type="submit" value="Create">
+<p>Choose from clients: </p>
+<br>
+<p><a href="/clients/new">Add a new client: </a></p>
+<br>
+<p>Choose a date an time(ex.09:30am): </p>
+<form method="POST" action="/appointments/date">
+<input type="datetime-local" name="date" />
+<input type="submit" />
 </form>
