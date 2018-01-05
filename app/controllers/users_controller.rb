@@ -46,9 +46,11 @@ class UsersController < ApplicationController
   #   end
   # end
   #
-  get '/users/login' do
+  get '/login' do
+    binding.pry
     if !session[:user_id]
       erb :'users/login'
+
     else
       redirect '/'
     end
