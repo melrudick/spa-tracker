@@ -13,8 +13,14 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get "/logout" do
+    session.clear
+    redirect "/"
+  end
+
   helpers do
     def logged_in?
+      
       !!session[:user_id]
     end
 
