@@ -15,12 +15,13 @@ class ApplicationController < Sinatra::Base
 
   get "/logout" do
     session.clear
+    # session.destroy? what's the difference and do I need it?
     redirect "/"
   end
 
   helpers do
     def logged_in?
-      
+
       !!session[:user_id]
     end
 
