@@ -7,6 +7,7 @@ class AppointmentsController < ApplicationController
 
   get '/appointments/new' do
     if logged_in?
+      @clients = Client.all
       erb :'appointments/new'
     else
       redirect "/"
@@ -14,6 +15,7 @@ class AppointmentsController < ApplicationController
   end
 
   post '/appointments/new' do
+    binding.pry
     if params[:appointment_type].empty?
       @appointment = Appointment.create!(appointment_type: params[:appointment_type], date: params[:date])
       session[:user_id] = @user.id

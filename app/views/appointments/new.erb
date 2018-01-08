@@ -2,11 +2,15 @@
 
 <p>Choose from clients: </p>
 <br>
-<select></select> this is a form for drop down menu
+<form method="POST" action="/appointments/new">
+<select>
+  <% @clients.each do |client| %>
+    <option value="1" gitname="1" ><%= client.name %></option>
+  <% end %>
+</select> this is a form for drop down menu
 <p><a href="/clients/new">Add a new client: </a></p>
 <br>
 <p>Choose a date an time(ex.09:30am): </p>
-<form method="POST" action="/appointments/date">
 <input type="datetime-local" name="date" />
 <input type="submit" />
 </form>
