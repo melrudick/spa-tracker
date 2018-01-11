@@ -15,11 +15,10 @@ class AppointmentsController < ApplicationController
   end
 
   post '/appointments/new' do
-    binding.pry
-    if params[:appointment_type].empty?
-      @appointment = Appointment.create!(appointment_type: params[:appointment_type], date: params[:date])
-      session[:user_id] = @user.id
-      redirect "users/#{@user.id}"
+    if !params.empty?
+      @appointment = Appointment.create!(appointment_type: params[:appointment_type], date: params[:date], client_id: params[:client_id], user_id: current_user.id)
+      session[:user_id] = current_user.id
+      redirect "users/#{current_user.id}"
     end
   end
 
