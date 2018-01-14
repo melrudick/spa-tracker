@@ -23,8 +23,39 @@ class AppointmentsController < ApplicationController
   end
 
   get "/appointments/:id" do
-    @appointment = Appointment.find_by[:id]
+    @appointment = Appointment.find_by(id: params[:id])
     erb :'users/index'
   end
+
+  get "/appointments/:id/edit" do
+      @appointment = Appointment.find_by(id: params[:id])
+      if logged_in?
+        erb :'appointments/edit'
+      else
+      redirect "/login"
+    end
+  end
+
+  patch "/appointments/:id" do
+    @appointment = Appointment.find_by(id: params[:id])
+    @appointment
+    if !params.empty?
+      @appointment = params[:datetime]
+      @appointment.save
+      erb :'users/show'
+    else
+      redirect "/appointment/#{@appointment.id}/edit"
+    end
+  end
+
+  # delete "/tweets/:id/delete" do
+  #   @tweet = Tweet.find_by_id(params[:id])
+  #   if logged_in? && current_user.tweets.include?(@tweet)
+  #     @tweet.delete
+  #     redirect "/tweets"
+  #   else
+  #     redirect "/login"
+  #   end
+  # end
 
 end

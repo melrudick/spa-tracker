@@ -6,9 +6,9 @@
  <% if @user.clients.length == 0 %>
   <p> You have no clients. </p>
  <% end %>
-  <% @user.clients.each do |client| %>
+  <% @user.clients.uniq.each do |client| %>
    <ul>
-      <li><%= client.name %></a></li>
+      <li><a href="/clients/<%=client.id%>/edit"><%= client.name %></a></li>
     </ul>
   <% end %>
   <h3><a href="/clients/new">Add a Client</a></h3>
@@ -19,7 +19,7 @@
   <% end %>
    <% @user.appointments.each do |appointment| %>
     <ul>
-      <li><a href="/appointments/<%=appointment.id%>"><%= appointment.client.name %> - <%= appointment.date %></a></li>
+      <li><a href="/appointments/<%=appointment.id%>/edit"><%= appointment.client.name %> - <%= appointment.date %></a></li>
     </ul>
   <% end %>
   <h3><a href="/appointments/new">Add An Appointment</a></h3>
