@@ -1,1 +1,12 @@
 <h1><%= @client.name %></h1>
+<h3>Edit Client Info:</h3>
+
+<form action="/clients" method="POST">
+  <label> Client Name </label>
+  <input type="text" name="name"></br>
+
+  <label> Client Notes </label>
+  <input type="text" name="notes"></br>
+
+  <input type="submit" value="Update">
+</form>

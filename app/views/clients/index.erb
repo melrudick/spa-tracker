@@ -1,0 +1,6 @@
+<h1>List of All Spa Clients</h1>
+<% @clients.each do |client| %>
+<li>
+  <a href="/clients/<%=client.id%>"><%= client.name %></a>
+</li>
+<% end %>
