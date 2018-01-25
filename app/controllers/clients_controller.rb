@@ -23,4 +23,12 @@ class ClientsController < ApplicationController
     @client = Client.find_by(id: params[:id])
     erb :'clients/edit'
   end
+
+  patch "/clients/:id" do
+    @client = Client.find(params[:id])
+    @client.name = params[:name]
+    @client.notes = params[:notes]
+    @client.save
+    redirect to "clients/#{@client.id}"
+  end
 end

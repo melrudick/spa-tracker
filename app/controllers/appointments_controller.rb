@@ -38,11 +38,10 @@ class AppointmentsController < ApplicationController
 
   patch "/appointments/:id" do
     @appointment = Appointment.find_by(id: params[:id])
-    @appointment
     if !params.empty?
-      @appointment = params[:datetime]
+      @appointment.date = params[:date]
       @appointment.save
-      erb :'users/show'
+      redirect to "users/#{@appointment.user_id}"
     else
       redirect "/appointment/#{@appointment.id}/edit"
     end

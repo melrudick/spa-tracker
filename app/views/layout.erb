@@ -4,6 +4,12 @@
 	<title>Welcome to Your Appointment Tracker</title>
 </head>
 <body>
+	<% if !logged_in? %>
+		<a href="/login">Log In</a>
+		<a href="/signup">Sign Up</a>
+	<% else %>
+		<a href="/logout">Log Out</a>
+	<% end %>
 	<%= yield %>
 </body>
 </html>

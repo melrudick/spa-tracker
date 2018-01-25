@@ -1,6 +1,7 @@
 <h1>Edit <%= @appointment.client.name %>'s Appointment</h1>
 
-<form action="/appointments/<%=@appointment.id %>" method="POST">
+<form action="/appointments/<%=@appointment.id%>" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="patch">
   <label> Client Name </label>
   <input type="text" name="name" value="<%=@appointment.client.name %>"> </br>
 
