@@ -1,20 +1,21 @@
 <h1>Hello, <%= @user.username %>!</h1>
 
 <h2>What would you like to do?</h2>
-
+<br>
 <p> Your Clients: </p>
  <% if @user.clients.length == 0 %>
   <p> You have no clients. </p>
  <% end %>
+ <ul>
   <% @user.clients.uniq.each do |client| %>
-   <ul>
-      <li><a href="/clients/<%=client.id%>/edit"><%= client.name %></a></li>
-    </ul>
-  <% end %>
-  
-  <br>
-  <h3><a href="/clients/new">Add a Client</a></h3>
 
+      <li><a href="/clients/<%=client.id%>"><%= client.name %></a></li>
+
+  <% end %>
+  </ul>
+  <h3><a href="/clients/new">Add a Client</a></h3>
+  <h3><a href="/clients">See a List of All Spa Clients</a></h3>
+<br>
   <p>Your Appointments: </p>
   <% if @user.appointments.length == 0 %>
   <p> You have no appointments.</p>
@@ -26,5 +27,3 @@
   <% end %>
   <h3><a href="/appointments/new">Add An Appointment</a></h3>
   <br>
-
-<a href="/logout">Log Out</a>

@@ -10,7 +10,7 @@ class ClientsController < ApplicationController
   end
 
   post "/clients" do
-    @client = Client.create(name: params[:name], notes: params[:notes])
+    @client = Client.create(name: params[:name])
     redirect "clients/#{@client.id}"
   end
 
@@ -24,11 +24,12 @@ class ClientsController < ApplicationController
     erb :'clients/edit'
   end
 
-  patch "/clients/:id" do
+  post "/clients/:id" do
     @client = Client.find(params[:id])
-    @client.name = params[:name]
-    @client.notes = params[:notes]
+    @client.notes.build(content: params[:content])
     @client.save
     redirect to "clients/#{@client.id}"
   end
 end
+
+# && current_user.clients.include?(@client)

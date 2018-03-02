@@ -40,10 +40,4 @@ class UsersController < ApplicationController
       redirect to '/login'
     end
   end
-
-
-
-  # @user.clients
-
-
 end

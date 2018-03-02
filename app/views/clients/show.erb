@@ -1,7 +1,13 @@
 
 <h1><%= @client.name %></h1><br>
-<%= @client.notes %><br><br>
+<% @client.notes.each do |note| %>
+<%= note.content %><br>
+<% end %>
 
-<a href="/clients/<%=@client.id%>/edit">Edit this Client</a>
-<br />
+<form action="/clients/<%=@client.id%>" method="post">
+  <textarea name="content" value=""></textarea>
+  <input type="submit" value="Add Note">
+
+</form>
+
 <a href="/users/show">Return to your Homepage</a>

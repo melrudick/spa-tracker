@@ -3,11 +3,16 @@
 <form action="/appointments/<%=@appointment.id%>" method="POST">
   <input type="hidden" id="hidden" name="_method" value="patch">
   <label> Client Name </label>
-  <input type="text" name="name" value="<%=@appointment.client.name %>"> </br>
+  <input type="text" name="appointment[client.id]" value="<%=@appointment.client.name %>"> </br>
 
 
   <label> Appointment Date and Time </label>
   <p>Choose a date an time(ex.09:30am): </p>
-  <input type="datetime-local" name="date" />
+  <input type="datetime-local" name="appointment[date]" value="<%= @appointment.date.strftime('%Y-%m-%dT%H:%M:%S') %>"/>
   <input type="submit" value="Update">
+</form>
+
+<form action="/appointments/<%= @appointment.id%>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete This Appointment">
 </form>

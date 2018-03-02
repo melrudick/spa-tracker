@@ -24,12 +24,12 @@ class AppointmentsController < ApplicationController
 
   get "/appointments/:id" do
     @appointment = Appointment.find_by(id: params[:id])
-    erb :'users/index'
+    erb :index
   end
 
   get "/appointments/:id/edit" do
       @appointment = Appointment.find_by(id: params[:id])
-      if logged_in?
+      if @appointment.user == current_user
         erb :'appointments/edit'
       else
       redirect "/login"
@@ -38,23 +38,22 @@ class AppointmentsController < ApplicationController
 
   patch "/appointments/:id" do
     @appointment = Appointment.find_by(id: params[:id])
-    if !params.empty?
-      @appointment.date = params[:date]
-      @appointment.save
+    if @appointment.user == current_user
+      @appointment.update(params[:appointment])
       redirect to "users/#{@appointment.user_id}"
     else
-      redirect "/appointment/#{@appointment.id}/edit"
+      redirect "/appointments/#{@appointment.id}/edit"
     end
   end
 
-  # delete "/tweets/:id/delete" do
-  #   @tweet = Tweet.find_by_id(params[:id])
-  #   if logged_in? && current_user.tweets.include?(@tweet)
-  #     @tweet.delete
-  #     redirect "/tweets"
-  #   else
-  #     redirect "/login"
-  #   end
-  # end
-
+  delete "/appointments/:id/delete" do
+    @appointment = Appointment.find(params[:id])
+    session[:user_id] = current_user.id
+    if logged_in? && current_user.appointments.include?(@appointment)
+      @appointment.destroy
+      redirect "users/#{current_user.id}"
+    else
+      redirect "/login"
+    end
+  end
 end
