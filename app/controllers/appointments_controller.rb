@@ -40,6 +40,8 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find_by(id: params[:id])
     if @appointment.user == current_user
       @appointment.update(params[:appointment])
+      @appointment.client = Client.find_or_create_by(name: params[:name])
+      @appointment.save
       redirect to "users/#{@appointment.user_id}"
     else
       redirect "/appointments/#{@appointment.id}/edit"
